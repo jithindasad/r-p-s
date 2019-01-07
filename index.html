@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissor</title>
+</head>
+<body>
+    <script>
+    function computerPlay(){
+        let choices = ["Rock","Paper", "Scissor"];
+        let getChoice = choices[Math.floor(Math.random() * 3)];
+        return getChoice;
+    }
+        
+    function lostMessage(playerSelection, computerSelection) {
+        console.log(`You Lost! :( \n Player: ${playerSelection} \n Computer: ${computerSelection}`);
+    }
+
+    function winMessage(playerSelection, computerSelection) {
+        console.log(`You Won! :) \n Player: ${playerSelection} \n Computer: ${computerSelection}`);
+    }
+
+    function drawMessage(playerSelection, computerSelection) {
+        console.log(`Its a Draw! :) \n Player: ${playerSelection} \n Computer: ${computerSelection}`);
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        let gameScore = [0,0];
+        computerSelection = computerSelection.toLowerCase();
+        playerSelection = playerSelection.toLowerCase();
+        if (playerSelection === computerSelection) {
+            drawMessage(playerSelection, computerSelection);
+            gameScore = [0,0];
+            return gameScore;
+        } else if (playerSelection === "rock" && computerSelection === "paper") {
+            lostMessage(playerSelection, computerSelection);
+            gameScore = [0,1];
+            return gameScore;
+        } else if (playerSelection === "rock" && computerSelection === "scissor") {
+            winMessage(playerSelection, computerSelection);
+            gameScore = [1,0];
+            return gameScore;
+        } else if (playerSelection === "paper" && computerSelection === "scissor") {
+            lostMessage(playerSelection, computerSelection);
+            gameScore = [0,1];
+            return gameScore;
+        } else if (playerSelection === "paper" && computerSelection === "rock") {
+            winMessage(playerSelection, computerSelection);
+            gameScore = [1,0];
+            return gameScore;
+        } else if (playerSelection === "scissor" && computerSelection === "paper") {
+            winMessage(playerSelection, computerSelection);
+            gameScore = [1,0];
+            return gameScore;
+        } else if (playerSelection === "scissor" && computerSelection === "rock") {
+            lostMessage(playerSelection, computerSelection);
+            gameScore = [0,1];
+            return gameScore;
+        }
+    }
+
+     function game(){
+        let playerScore = 0;
+        let computerScore = 0;
+        let counter = 1;
+         while (counter <= 5){
+            let playerSelection = prompt("enter your choice");
+            let computerSelection = computerPlay();
+            let currentScore = playRound(playerSelection, computerSelection); 
+            if (currentScore[0] > currentScore[1]){
+                playerScore++;
+            }else if (currentScore[0] < currentScore[1]){
+                computerScore++;
+            }
+            counter ++;
+         }
+         if (playerScore > computerScore) {
+             console.log(`Player won! Score: ${playerScore}`);
+             
+         } else if (playerScore < computerScore) {
+             console.log(`Computer won! Score: ${computerScore}`);
+
+         } else {
+             console.log("Draw");
+         }
+         
+    }       
+
+            
+            
+            game();
+            
+             
+	
+
+    
+    
+    </script>
+</body>
+</html>
